@@ -1,0 +1,25 @@
+---
+- name: git install
+  apt:
+    name: git
+    state: present
+    update_cache: 'yes'
+
+- name: git checkout
+  git:
+    repo: 'https://github.com/b2std/ex2.git'
+    dest: /root/proj01/
+
+- name: maven installation
+  apt:
+    name: maven
+    state: present
+    update_cache: 'yes'
+
+- name: build war
+  shell: mvn -f /root/proj01/boxfuse-sample-java-war-hello/pom.xml package
+
+# Why should I use "synchronize" here?
+- name: file sending to prod srv
+  shell: rsync -rz /root/proj01/boxfuse-sample-java-war-hello/target/* root@34.89.244.241:/root/proj01/ --delete
+

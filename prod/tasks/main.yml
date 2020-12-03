@@ -1,0 +1,19 @@
+---
+- name: installation of jre
+  apt:
+    name: openjdk-11-jdk
+    state: present
+
+- name: installation of tomcat9
+  apt:
+    name: tomcat9
+    state: present
+
+- name: start tomcat9
+  service:
+    name: tomcat9
+    state: started
+
+# Why not?
+- name: copy war to tomcat workdir
+  shell: cp -f /root/proj01/hello-1.0.war /var/lib/tomcat9/webapps/

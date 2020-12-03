@@ -1,0 +1,17 @@
+---
+- name: dev srv config
+  hosts: dev
+  become: yes
+
+  roles:    
+    - dev
+
+- name: prod srv config
+  hosts: prod
+  become: yes
+
+  roles:
+    - prod
+
+
+
